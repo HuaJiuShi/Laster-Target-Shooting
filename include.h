@@ -1,50 +1,24 @@
-/******************** (C) COPYRIGHT 2011 Ò°»ðÇ¶ÈëÊ½¿ª·¢¹¤×÷ÊÒ ********************
- * ÎÄ¼þÃû       £ºinclude.h
- * ÃèÊö         £º¹¤³ÌÄ£°æÍ·ÎÄ¼þ
- *
- * ÊµÑéÆ½Ì¨     £ºÒ°»ðkinetis¿ª·¢°å
- * ¿â°æ±¾       £º
- * Ç¶ÈëÏµÍ³     £º
- *
- * ×÷Õß         £ºÒ°»ðÇ¶ÈëÊ½¿ª·¢¹¤×÷ÊÒ
- * ÌÔ±¦µê       £ºhttp://firestm32.taobao.com
- * ¼¼ÊõÖ§³ÖÂÛÌ³ £ºhttp://www.ourdev.cn/bbs/bbs_list.jsp?bbs_id=1008
-**********************************************************************************/
-
 #ifndef __INCLUDE_H__
 #define __INCLUDE_H__
 
 #include  "common.h"
 
 /*
- * Include ÓÃ»§×Ô¶¨ÒåµÄÍ·ÎÄ¼þ
+ * Include ç”¨æˆ·è‡ªå®šä¹‰çš„å¤´æ–‡ä»¶ï¼Œè¿™é‡ŒåŒ…å«è‡ªå·±ç”¨çš„å¤´æ–‡ä»¶
  */
 
-#include  "gpio.h"      //IO¿Ú²Ù×÷
-#include  "LED.H"       //Á÷Ë®µÆ
-#include  "uart.h"      //´®¿Ú
-#include  "adc.h"       //ADCÄ£¿é
-#include  "FTM.h"       //FTMÄ£¿é£¨FTM0£ºµç»ú¿ØÖÆ / Í¨ÓÃ /PWM     FTM1¡¢2£ºÕý½»½âÂë / Í¨ÓÃ /PWM £©
-#include  "PIT.h"       //ÖÜÆÚÖÐ¶Ï¼ÆÊ±Æ÷
+#include  "gpio.h"      //IOå£æ“ä½œ
+#include  "LED.H"       //æµæ°´ç¯
+#include  "uart.h"      //ä¸²å£
+#include  "adc.h"       //ADCæ¨¡å—
+#include  "FTM.h"       //FTMæ¨¡å—ï¼ˆFTM0ï¼šç”µæœºæŽ§åˆ¶ / é€šç”¨ /PWM     FTM1ã€2ï¼šæ­£äº¤è§£ç  / é€šç”¨ /PWM ï¼‰
+#include  "PIT.h"       //å‘¨æœŸä¸­æ–­è®¡æ—¶å™¨
 #include  "i2c.h"
 #include  "AT24C02.h"
-#include  "lptmr.h"     //µÍ¹¦ºÄ¶¨Ê±Æ÷(ÑÓÊ±)
-#include  "exti.h"      //EXTIÍâ²¿GPIOÖÐ¶Ï
-#include  "arm_math.h"  //DSP¿â
+#include  "lptmr.h"     //ä½ŽåŠŸè€—å®šæ—¶å™¨(å»¶æ—¶)
+#include  "exti.h"      //EXTIå¤–éƒ¨GPIOä¸­æ–­
+#include  "arm_math.h"  //DSPåº“
 #include "port.h"
-
-
-
-
-/***************** ucos ×¨ÓÃ *****************/
-#define USOC_EN     0u      //0Îª½ûÖ¹uC/OS£¬´óÓÚ0ÔòÆô¶¯uC/OS
-#if USOC_EN > 0u
-#include  "ucos_ii.h"  		//uC/OS-IIÏµÍ³º¯ÊýÍ·ÎÄ¼þ
-#include  "BSP.h"			//Óë¿ª·¢°åÏà¹ØµÄº¯Êý
-#include  "app.h"			//ÓÃ»§ÈÎÎñº¯Êý
-
-
-#endif  //if  USOC_EN > 0
 
 
 #endif  //__INCLUDE_H__
