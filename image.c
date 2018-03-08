@@ -1,5 +1,5 @@
 #include "image.h"
-#include "ov7725.h"
+#include "ov7725.h" //åŒ…å«è‡ªå·±çš„å›¾åƒæ¥æº
 
 #define START_LINE 0
 
@@ -8,14 +8,14 @@ s16 right[IMG_H]={0};
 float middle_x=0,middle_y=0;
 s16 L_M_X=CAMERA_W,L_M_Y=0,R_M_X=0,R_M_Y=0;
 
-void findborder(void)   //Ñ°ÕÒ±ßÏß
+void findborder(void)   //å¯»æ‰¾è¾¹çº¿
 {
     s16 i;
-    s16 row=CAMERA_H;            //120ĞĞ
-    u8  Y_flag0=CAMERA_W,Y_flag1=0;          //YÖáµÄÓĞĞ§µãÊı·¶Î§
+    s16 row=CAMERA_H;            //120è¡Œ
+    u8  Y_flag0=CAMERA_W,Y_flag1=0;          //Yè½´çš„æœ‰æ•ˆç‚¹æ•°èŒƒå›´
     s16 n1,n2;
     
-    for(i=0;i<IMG_H;i++)   //Ã¿´ÎÀ´¶¼ÒªÇåÁã
+    for(i=0;i<IMG_H;i++)   //æ¯æ¬¡æ¥éƒ½è¦æ¸…é›¶
     {
       left[i]=0;
       right[i]=0;
@@ -26,18 +26,18 @@ void findborder(void)   //Ñ°ÕÒ±ßÏß
     }
     
     
-    //ÏÈ½«Õû·ùÍ¼ÏñµÄ±ßÏß²É¼¯³öÀ´
+    //å…ˆå°†æ•´å¹…å›¾åƒçš„è¾¹çº¿é‡‡é›†å‡ºæ¥
     for(row=10;row<IMG_H-10;row++)
     {
-      for(i=6;i<IMG_W-6;i++)    //XÖá£¨160ÁĞ£©ËùÓĞµÄµã¶¼´¦Àí
+      for(i=6;i<IMG_W-6;i++)    //Xè½´ï¼ˆ160åˆ—ï¼‰æ‰€æœ‰çš„ç‚¹éƒ½å¤„ç†
       {
-         if(img_ready[row][i]==0&&img_ready[row][i+1])       //Á¬Ğø5¸öµãÎª°×µãÅĞ¶ÏÎª°×ÅÌ
+         if(img_ready[row][i]==0&&img_ready[row][i+1])       //è¿ç»­5ä¸ªç‚¹ä¸ºç™½ç‚¹åˆ¤æ–­ä¸ºç™½ç›˜
             break;
       }
       left[row]=i;
-      for(i=IMG_W-6;i>5;i--)    //XÖá£¨160ÁĞ£©ËùÓĞµÄµã¶¼´¦Àí
+      for(i=IMG_W-6;i>5;i--)    //Xè½´ï¼ˆ160åˆ—ï¼‰æ‰€æœ‰çš„ç‚¹éƒ½å¤„ç†
       {
-         if(img_ready[row][i-1]&&img_ready[row][i]==0)       //Á¬ĞøÈı¸öµãÎª°×µãÅĞ¶ÏÎª°×ÅÌ
+         if(img_ready[row][i-1]&&img_ready[row][i]==0)       //è¿ç»­ä¸‰ä¸ªç‚¹ä¸ºç™½ç‚¹åˆ¤æ–­ä¸ºç™½ç›˜
             break;
       }
       right[row]=i;
@@ -63,7 +63,7 @@ void findborder(void)   //Ñ°ÕÒ±ßÏß
     }
       
 
-    //¿ªÊ¼ËãÔ²ĞÄ
+    //å¼€å§‹ç®—åœ†å¿ƒ
     for(i=Y_flag0;i<Y_flag1;i++)
     {
         if(left[i]<=L_M_X)
