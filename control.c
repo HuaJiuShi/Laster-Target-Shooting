@@ -6,9 +6,9 @@
 //extern volatile u8 LPT_INT_count;
 extern u16 piancha,flag_pid=0,END_MID,speed_max;
 extern s16 OutData[4],MMA_Y,MMA_X,MMA_Z,qulvs;  
-s16 SPEED=0,KPM=4,KDM=14,errm1=300,errm2=300,errm3=0,oldpwm=0;//ËÙ¶È±äÁ¿£¬µç»úP I D,¶æ»úP D ,µç»úÎó²î£¬¶æ»úÎó²î
+s16 SPEED=0,KPM=4,KDM=14,errm1=300,errm2=300,errm3=0,oldpwm=0;//é€Ÿåº¦å˜é‡ï¼Œç”µæœºP I D,èˆµæœºP D ,ç”µæœºè¯¯å·®ï¼Œèˆµæœºè¯¯å·®
 double errs1=1,errs2=0,KPS=0.1000,KDS=0.06,KIS=0.000,olddir=0,KIM=0.5,accM=1.0,accS=0.0;
-//¶æ»úPD¿ØÖÆ ÊäÈëÀíÏëÖµ
+//èˆµæœºPDæ§åˆ¶ è¾“å…¥ç†æƒ³å€¼
 u16 plus=0,qipao=0;;
 extern u8 END_MARK;
 void ste_PD(s16 dir)//
@@ -29,13 +29,13 @@ void ste_PD(s16 dir)//
     errs2=errs1;
 }
 
-//µç»úPID¿ØÖÆ ÊäÈëÀíÏëÖµ
+//ç”µæœºPIDæ§åˆ¶ è¾“å…¥ç†æƒ³å€¼
 void mot_PID(s16 mspd)
 {
     s16 KPM1=KPM;
     if(mspd<180&&END_MARK<2)mspd=180;
     //if(mspd<0)mspd=0;
-    errm1 = mspd - SPEED; //Ëã³öÎó²î 
+    errm1 = mspd - SPEED; //ç®—å‡ºè¯¯å·® 
     if(errm1<0)
         KPM1=KPM+2;
     else
@@ -43,7 +43,7 @@ void mot_PID(s16 mspd)
     KIM *= errm1;
     accM += KIM;
     mspd=KPM1*errm1+(s16)accM+KDM*(errm1-errm2)+oldpwm;
-    if(mspd>=6999)//Èç¹ûÕ¼¿Õ±È´óÓÚ10000 ÔòµÈÓÚ10000
+    if(mspd>=6999)//å¦‚æœå ç©ºæ¯”å¤§äº10000 åˆ™ç­‰äº10000
         mspd=6999;
     else
     if(mspd<=-6999)
@@ -58,30 +58,30 @@ void mot_PID(s16 mspd)
     KIM=2000u;
 }
 
-//¿Éµ÷ÓÃÍê³ÉÖÇÄÜ³µ¿ØÖÆ
+//å¯è°ƒç”¨å®Œæˆæ§åˆ¶
 void cotrl(u16 dir,s16 mspd)
 {   
     mot_PID(mspd);  
     ste_PD(dir);
 }
 
-//ËÙ¶È¼ì²â£¬ÇåÁã¼Ä´æÆ÷
+//é€Ÿåº¦æ£€æµ‹ï¼Œæ¸…é›¶å¯„å­˜å™¨
 void spd_check()
 {
-    u8 FRONT=1; //±àÂëÆ÷·½Ïò±äÁ¿¡£·´×ªµÄÊ±ºòÈÏÎªÊÇ0¾Í¿ÉÒÔ£¬²»ĞĞÔÙ¸Ä
+    u8 FRONT=1; //ç¼–ç å™¨æ–¹å‘å˜é‡ã€‚åè½¬çš„æ—¶å€™è®¤ä¸ºæ˜¯0å°±å¯ä»¥ï¼Œä¸è¡Œå†æ”¹
     FRONT=PTA12_IN;
     if(FRONT==0)
         SPEED=0;
     else
-    SPEED=LPTMR0_CNR;                                   //±£´æÂö³å¼ÆÊıÆ÷¼ÆËãÖµ,  
-    lptmr_counter_clean();                                  //Çå¿ÕÂö³å¼ÆÊıÆ÷¼ÆËãÖµ£¨ÂíÉÏÇå¿Õ£¬ÕâÑù²ÅÄÜ±£Ö¤¼ÆÊıÖµ×¼È·£©
+    SPEED=LPTMR0_CNR;                                   //ä¿å­˜è„‰å†²è®¡æ•°å™¨è®¡ç®—å€¼,  
+    lptmr_counter_clean();                                  //æ¸…ç©ºè„‰å†²è®¡æ•°å™¨è®¡ç®—å€¼ï¼ˆé©¬ä¸Šæ¸…ç©ºï¼Œè¿™æ ·æ‰èƒ½ä¿è¯è®¡æ•°å€¼å‡†ç¡®ï¼‰
     plus+=SPEED;
     qipao+=SPEED;
     //MMA8451();
 
 }
 
-//µç»úpwmËÀÇø¿ØÖÆ£¬·ÀÖ¹Òç³ö
+//ç”µæœºpwmæ­»åŒºæ§åˆ¶ï¼Œé˜²æ­¢æº¢å‡º
 void mpwm(s16 pwm)
 {
 
@@ -99,7 +99,7 @@ void mpwm(s16 pwm)
 }
 void spwm(u16 pwm)
 {
-    if(pwm>DJ_scope+DJ_center)//ÏŞÖÆº¯Êı
+    if(pwm>DJ_scope+DJ_center)//é™åˆ¶å‡½æ•°
         pwm=DJ_scope+DJ_center;
     else 
     if(pwm<DJ_center-DJ_scope)
